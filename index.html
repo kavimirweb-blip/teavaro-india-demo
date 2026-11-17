@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teavaro | Global Brewhouse: bubble teas, frosteas &amp; desserts</title>
+<meta name="description" content="Teavaro Global Brewhouse: bubble teas, fusion teas, frosteas, hot chocolate, cookies and bites. Build your cup and order. A concept demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Brief: Teavaro Global Brewhouse. Bubble teas, fusion teas, frosteas, hot chocolate, cookies, burgers. 30.6K on Instagram, launching in Bangalore and Noida.
+   Idea: build your own cup. The cup is the page: pick a base, a topping and pearls, and the cup fills, the page re-tints, and the order goes to their DM.
+   Palette taken from their own photos: sticker yellow, bird pink, olive green, kraft cream. Opening: the sticker spins in. */
+:root{
+  --yellow:#f7d65a; --yellow-d:#e8bd2c; --pink:#ee6fae; --pink-d:#cf3f8a; --olive:#4f5a22; --cream:#fff6e4; --kraft:#e8cfa6; --ink:#1b1a14; --mute:#7b705b; --blush:#fbd9e6;
+  --disp:'Fredoka',system-ui,sans-serif; --serif:'DM Serif Display',Georgia,serif; --sans:'Nunito',system-ui,sans-serif; --ease:cubic-bezier(.2,.7,.2,1);
+  --tint:#f7d65a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-weight:600;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.wrap{width:min(1220px,100% - 40px);margin:0 auto}
+.lab{font-family:var(--disp);font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--pink-d);font-weight:600}
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:.98;letter-spacing:-.01em}
+h2{font-size:clamp(2.4rem,5.6vw,4.6rem)}
+h2 em,h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--pink-d)}
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:1em 1.8em;border-radius:99px;font-family:var(--disp);font-size:.95rem;letter-spacing:.04em;font-weight:600;text-decoration:none;border:2.5px solid var(--ink);transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
+.btn-y{background:var(--yellow);box-shadow:4px 4px 0 var(--ink)}.btn-y:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn-p{background:var(--pink);color:#fff;box-shadow:4px 4px 0 var(--ink)}.btn-p:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn-o{background:transparent}.btn-o:hover{background:var(--ink);color:var(--cream)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+#loader{position:fixed;inset:0;z-index:300;background:var(--yellow);display:grid;place-items:center;transition:opacity .7s .1s,visibility .7s .1s}
+#loader.off{opacity:0;visibility:hidden}
+#loader img{width:min(46vw,200px);border-radius:50%;animation:spin 1.2s var(--ease) both;box-shadow:6px 6px 0 var(--ink);border:3px solid var(--ink)}
+@keyframes spin{from{transform:rotate(-300deg) scale(0)}to{transform:none}}
+#skip{position:absolute;right:20px;bottom:20px;font-family:var(--disp);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;padding:14px 0;transition:background .3s,padding .3s}
+nav.s{background:rgba(255,246,228,.92);backdrop-filter:blur(10px);padding:8px 0;box-shadow:0 2px 0 var(--ink)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:.02em}
+.logo img{width:42px;height:42px;border-radius:50%;border:2.5px solid var(--ink)}
+.logo small{display:block;font-size:.5rem;letter-spacing:.3em;font-weight:600;color:var(--pink-d);line-height:1}
+nav ul{display:flex;gap:26px;list-style:none;font-family:var(--disp);font-size:.9rem;font-weight:600}
+nav ul a{text-decoration:none}nav ul a:hover{color:var(--pink-d)}
+nav .btn{padding:.6em 1.2em;font-size:.82rem;box-shadow:3px 3px 0 var(--ink)}
+
+/* hero */
+.hero{position:relative;padding:116px 0 70px;background:var(--yellow);overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:40px;background:radial-gradient(circle at 25px 0,transparent 24px,var(--cream) 25px) 0 0/50px 40px repeat-x}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:calc(100svh - 190px);position:relative;z-index:2}
+.hero h1{font-size:clamp(3.8rem,10vw,9rem);line-height:.9;color:var(--ink)}
+.hero h1 span{display:block}
+.hero h1 em{color:var(--pink-d);display:inline-block;transform:rotate(-3deg)}
+.hero .sub{max-width:27em;margin:22px 0 30px;font-size:1.12rem}
+.hero .row{display:flex;gap:14px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.chips span{padding:.45em 1em;border:2.5px solid var(--ink);border-radius:99px;font-family:var(--disp);font-size:.82rem;font-weight:600;background:var(--cream)}
+.hph{position:relative;aspect-ratio:1;max-width:520px;margin-left:auto}
+.hph .ph{position:absolute;inset:0;border:3px solid var(--ink);border-radius:46% 46% 24px 24px/36% 36% 24px 24px;overflow:hidden;box-shadow:10px 10px 0 var(--ink);background:var(--kraft)}
+.hph .ph img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;position:absolute;inset:0}
+.hph .ph img.on{opacity:1}
+.hph .st{position:absolute;left:-8%;bottom:-4%;width:34%;border-radius:50%;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);animation:wob 6s ease-in-out infinite;z-index:3}
+@keyframes wob{50%{transform:rotate(14deg) translateY(-6px)}}
+.hph .bub{position:absolute;right:-4%;top:6%;z-index:3;background:var(--pink);color:#fff;border:3px solid var(--ink);padding:.6em 1em;border-radius:99px;font-family:var(--disp);font-weight:700;font-size:.9rem;transform:rotate(8deg);box-shadow:4px 4px 0 var(--ink)}
+.pearls{position:absolute;inset:0;pointer-events:none;z-index:1}
+.pearls i{position:absolute;bottom:-30px;width:var(--s);height:var(--s);border-radius:50%;background:var(--ink);opacity:.85;animation:rise var(--d) linear infinite;animation-delay:var(--w)}
+@keyframes rise{to{transform:translateY(-110vh) translateX(var(--x))}}
+
+.mq{background:var(--ink);color:var(--yellow);padding:14px 0;overflow:hidden;white-space:nowrap}
+.mq div{display:inline-block;animation:mq 36s linear infinite;font-family:var(--disp);font-weight:600;font-size:clamp(1.3rem,3vw,2rem)}
+.mq span{margin:0 .7em}.mq i{font-style:normal;color:var(--pink)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.sec{padding:100px 0}
+
+/* builder */
+.build{background:var(--tint);transition:background .7s;position:relative}
+.build .lab{color:var(--ink)}
+.bg{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:44px}
+.cupw{position:relative;max-width:380px;margin:0 auto;width:100%}
+.cupw svg{width:100%;height:auto;filter:drop-shadow(8px 10px 0 rgba(27,26,20,.9))}
+.cupw .nm{position:absolute;left:50%;transform:translateX(-50%);bottom:-26px;white-space:nowrap;background:var(--cream);border:3px solid var(--ink);padding:.5em 1.3em;border-radius:99px;font-family:var(--disp);font-weight:700;font-size:1.15rem;box-shadow:4px 4px 0 var(--ink)}
+.cup-l{transition:y .8s var(--ease),height .8s var(--ease),fill .6s}
+.opts{display:grid;gap:26px;background:var(--cream);border:3px solid var(--ink);border-radius:28px;padding:30px;box-shadow:8px 8px 0 var(--ink)}
+.ll{font-family:var(--disp);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;font-weight:600}
+.cl{display:flex;flex-wrap:wrap;gap:9px}
+.chip{padding:.6em 1.2em;border:2.5px solid var(--ink);border-radius:99px;font-family:var(--disp);font-weight:600;font-size:.95rem;background:#fff;transition:transform .2s,background .2s}
+.chip:hover{transform:translateY(-2px)}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--yellow)}
+.sw{display:flex;align-items:center;gap:8px}
+.sw i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink)}
+.sum{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:6px}
+.sum p{font-size:.9rem;color:var(--mute);max-width:16em}
+.note{font-size:.78rem;color:var(--mute);margin-top:12px}
+
+/* menu */
+.menu{background:var(--cream)}
+.mh{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:34px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{padding:.7em 1.4em;border:2.5px solid var(--ink);border-radius:99px;font-family:var(--disp);font-weight:600;background:#fff;transition:.2s}
+.tabs button[aria-pressed=true]{background:var(--pink);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+.mg{display:grid;grid-template-columns:.95fr 1.05fr;gap:50px;align-items:center}
+.mph{position:relative;aspect-ratio:1;border:3px solid var(--ink);border-radius:30px;overflow:hidden;box-shadow:9px 9px 0 var(--ink);background:var(--kraft)}
+.mph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .7s,transform 1.2s var(--ease)}
+.mph img.on{opacity:1;transform:none}
+.mlist{list-style:none;border-top:2.5px solid var(--ink)}
+.mlist li{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:2.5px solid var(--ink);cursor:pointer;transition:padding .25s var(--ease),background .25s}
+.mlist li:hover{padding-left:14px;background:var(--blush)}
+.mlist h3{font-size:1.6rem}
+.mlist small{display:block;font-family:var(--sans);font-weight:600;color:var(--mute);font-size:.9rem;line-height:1.35;margin-top:2px}
+.mlist .go{font-family:var(--disp);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;border:2.5px solid var(--ink);border-radius:99px;padding:.45em 1em;background:var(--yellow)}
+
+/* brew */
+.brew{background:var(--olive);color:var(--cream);position:relative;overflow:hidden}
+.brew .lab{color:var(--yellow)}.brew h2 em{color:var(--yellow)}
+.bw{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.bw p{max-width:30em;margin-top:16px;opacity:.9}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.stats div{border:3px solid var(--cream);border-radius:20px;padding:18px 14px;text-align:center}
+.stats b{display:block;font-family:var(--disp);font-size:2.4rem;line-height:1;color:var(--yellow)}
+.stats span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.cities{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.cities span{padding:.5em 1.1em;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:99px;font-family:var(--disp);font-weight:600}
+.bph{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bph img{border:3px solid var(--cream);border-radius:24px;aspect-ratio:3/4;object-fit:cover;width:100%}
+.bph img:last-child{margin-top:34px}
+
+/* gallery rail */
+.gal{background:var(--blush)}
+.rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 30px;margin:0 -20px;scrollbar-width:thin}
+.gc{flex:0 0 min(300px,74vw);scroll-snap-align:start}
+.gc .im{aspect-ratio:4/5;border:3px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:6px 6px 0 var(--ink);background:var(--kraft)}
+.gc img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.gc:hover img{transform:scale(1.07)}
+.gc h3{font-size:1.4rem;margin-top:14px}
+.gc p{font-size:.88rem;color:var(--mute)}
+
+/* order */
+.order{background:var(--yellow);position:relative;overflow:hidden;padding:100px 0 0}
+.og{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.links{display:grid;gap:12px;margin-top:28px}
+.lk{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 22px;border:3px solid var(--ink);border-radius:20px;background:var(--cream);text-decoration:none;box-shadow:5px 5px 0 var(--ink);transition:transform .2s,box-shadow .2s;font-family:var(--disp);font-weight:600;font-size:1.15rem}
+.lk:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.lk small{display:block;font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--mute)}
+.oimg{max-width:400px;margin-left:auto;aspect-ratio:4/5;border:3px solid var(--ink);border-radius:46% 46% 24px 24px/30% 30% 24px 24px;overflow:hidden;box-shadow:10px 10px 0 var(--ink)}
+.oimg img{width:100%;height:100%;object-fit:cover}
+.big{font-family:var(--disp);font-weight:700;font-size:clamp(5rem,23vw,21rem);line-height:.78;text-align:center;white-space:nowrap;margin-top:60px;margin-bottom:-.1em;color:var(--ink);opacity:.9;letter-spacing:-.03em;user-select:none}
+.foot{background:var(--ink);color:var(--cream);padding:18px 0 96px;font-size:.8rem}
+.foot .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;opacity:.75}
+
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);z-index:150;background:var(--cream);border:3px solid var(--ink);padding:.8em 1.3em;border-radius:16px;box-shadow:5px 5px 0 var(--ink);font-family:var(--disp);font-size:.95rem;max-width:min(92vw,380px);text-align:center;opacity:0;pointer-events:none;transition:.4s var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.mcta{position:fixed;inset:auto 12px 12px 12px;z-index:60;display:none;gap:10px;padding:8px;border-radius:99px;background:var(--ink);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.mcta a{flex:1;text-align:center;padding:.8em 1em;border-radius:99px;font-family:var(--disp);font-size:.9rem;font-weight:600;text-decoration:none;color:var(--cream);border:2px solid rgba(255,255,255,.35)}
+.mcta a.p{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+
+@media(max-width:900px){
+  nav ul{display:none}
+  .hero{padding-top:92px}
+  .hero .wrap,.bg,.mg,.bw,.og{grid-template-columns:1fr;gap:40px}
+  .hero .wrap{min-height:0}
+  .hph{max-width:380px;margin:0 auto}
+  .sec{padding:72px 0}
+  .opts{padding:22px}
+  .mph{max-width:440px;margin:0 auto;width:100%}
+  .oimg{margin:0 auto}
+  .mcta{display:flex}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}.rv{opacity:1;transform:none}.pearls{display:none}}
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true"><img src="img/sticker.jpg" alt=""><button id="skip" type="button">Skip</button></div>
+
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#top"><img src="img/sticker.jpg" alt=""><span>Teavaro<small>GLOBAL BREWHOUSE</small></span></a>
+  <ul><li><a href="#build">Build your cup</a></li><li><a href="#menu">Menu</a></li><li><a href="#brew">Brewhouse</a></li><li><a href="#order">Order</a></li></ul>
+  <a class="btn btn-p" href="#order">Order now</a>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="pearls" id="pearls" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="lab" style="color:var(--ink)">Bubble teas · Frosteas · Desserts</p>
+      <h1 style="margin-top:14px"><span>Sip the</span><span><em>world,</em></span><span>one cup.</span></h1>
+      <p class="sub">Bubble teas, fusion teas, frosteas, hot chocolate and warm cookies from a global brewhouse. Build your own cup and send it to us.</p>
+      <div class="row"><a class="btn btn-p" href="#build">Build my cup</a><a class="btn btn-o" href="#menu">See the menu</a></div>
+      <div class="chips"><span>30.6K on Instagram</span><span>Bangalore &amp; Noida launching</span><span>Boba · Matcha · Cocoa</span></div>
+    </div>
+    <div class="hph" id="hph">
+      <div class="ph">
+        <img src="img/matcha-diya.jpg" alt="Layered green milk tea with mango and pearls beside marigolds and a diya" class="on">
+        <img src="img/halloween.jpg" alt="Two frosteas topped with cream and cookie ghosts">
+        <img src="img/cafe-table.jpg" alt="Teavaro drinks, burger and sandwich on a table">
+      </div>
+      <img class="st" src="img/sticker.jpg" alt="Teavaro Global Brewhouse sticker">
+      <div class="bub">Now with pearls!</div>
+    </div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div><span>Bubble tea</span><i>●</i><span>Matcha</span><i>●</i><span>Frostea</span><i>●</i><span>Hot chocolate</span><i>●</i><span>Cookies</span><i>●</i><span>Burgers &amp; bites</span><i>●</i><span>Bubble tea</span><i>●</i><span>Matcha</span><i>●</i><span>Frostea</span><i>●</i><span>Hot chocolate</span><i>●</i><span>Cookies</span><i>●</i><span>Burgers &amp; bites</span><i>●</i></div></div>
+
+<section class="sec build" id="build">
+  <div class="wrap">
+    <div class="rv"><p class="lab">Build your cup</p><h2 style="margin-top:12px">Your cup,<br><em>your rules.</em></h2></div>
+    <div class="bg rv">
+      <div class="cupw">
+        <svg viewBox="0 0 240 420" role="img" aria-label="Your custom cup">
+          <defs>
+            <clipPath id="cc"><path d="M52 60 L188 60 Q196 60 196 70 L190 372 Q189 392 169 392 L71 392 Q51 392 50 372 L44 70 Q44 60 52 60 Z"/></clipPath>
+            <clipPath id="sc"><circle cx="120" cy="228" r="46"/></clipPath>
+            <pattern id="pp" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="6" cy="14" r="6" fill="#1b1a14"/><circle cx="16" cy="6" r="5" fill="#1b1a14"/></pattern>
+          </defs>
+          <rect x="30" y="396" width="180" height="14" rx="7" fill="#1b1a14" opacity=".15"/>
+          <g clip-path="url(#cc)">
+            <rect x="40" y="60" width="160" height="340" fill="#fff" opacity=".75"/>
+            <rect class="cup-l" id="L-base" x="40" y="150" width="160" height="250" fill="#9fd36a"/>
+            <rect class="cup-l" id="L-mid" x="40" y="120" width="160" height="40" fill="#fff"/>
+            <rect class="cup-l" id="L-top" x="40" y="96" width="160" height="34" fill="#ffd84d"/>
+            <rect class="cup-l" id="L-pearl" x="40" y="342" width="160" height="58" fill="url(#pp)"/>
+            <rect x="44" y="62" width="12" height="326" fill="#fff" opacity=".35"/>
+          </g>
+          <path d="M52 60 L188 60 Q196 60 196 70 L190 372 Q189 392 169 392 L71 392 Q51 392 50 372 L44 70 Q44 60 52 60 Z" fill="none" stroke="#1b1a14" stroke-width="5" stroke-linejoin="round"/>
+          <rect x="38" y="50" width="164" height="16" rx="8" fill="#fff6e4" stroke="#1b1a14" stroke-width="5"/>
+          <rect x="132" y="2" width="14" height="58" rx="7" fill="#ee6fae" stroke="#1b1a14" stroke-width="4" transform="rotate(12 139 30)"/>
+          <image href="img/sticker.jpg" x="74" y="182" width="92" height="92" clip-path="url(#sc)"/>
+          <circle cx="120" cy="228" r="46" fill="none" stroke="#1b1a14" stroke-width="4"/>
+        </svg>
+        <div class="nm" id="cname">Strawberry Matcha</div>
+      </div>
+      <div class="opts">
+        <div><div class="ll">1 · Base</div><div class="cl" id="o-base"></div></div>
+        <div><div class="ll">2 · Topping</div><div class="cl" id="o-top"></div></div>
+        <div><div class="ll">3 · Extras</div><div class="cl" id="o-ext"></div></div>
+        <div><div class="ll">4 · Size</div><div class="cl" id="o-size"></div></div>
+        <div class="sum"><p id="sum"></p><a class="btn btn-p" href="#" id="send">Send this cup to Teavaro</a></div>
+        <p class="note" style="margin:0">Concept builder with sample flavours. It opens Instagram with your cup written out, and we'd connect your real menu and prices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec menu" id="menu">
+  <div class="wrap">
+    <div class="mh rv"><div><p class="lab">The menu board</p><h2 style="margin-top:12px">What's <em>brewing.</em></h2></div><div class="tabs" id="tabs" role="group" aria-label="Menu"></div></div>
+    <div class="mg rv">
+      <div class="mph" id="mph"><img src="img/matcha-diya.jpg" alt="" class="on"><img src="img/halloween.jpg" alt=""><img src="img/cocoa.jpg" alt="" style="object-position:50% 50%"><img src="img/cookie.jpg" alt=""><img src="img/cafe-table.jpg" alt=""><img src="img/iced-coffee.jpg" alt=""></div>
+      <div><ul class="mlist" id="mlist"></ul><p class="note">Menu taken from Teavaro's own posts. No prices shown: we'd add your live menu.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec brew" id="brew">
+  <div class="wrap bw">
+    <div class="rv"><p class="lab">The brewhouse</p><h2 style="margin-top:12px">A global brewhouse,<br><em>made for sharing.</em></h2>
+      <p>Teavaro serves bubble teas and fusion teas with frosteas, desserts and café bites, and it is growing: its Instagram highlights follow the launches in Bangalore and Noida.</p>
+      <div class="cities"><span>Bangalore launch</span><span>Noida launch</span></div>
+      <div class="stats"><div><b>30.6K</b><span>Followers</span></div><div><b>800+</b><span>Posts</span></div><div><b>2</b><span>New launches</span></div></div></div>
+    <div class="bph rv"><img src="img/iced-coffee.jpg" alt="Iced coffee from above on a terrazzo table"><img src="img/cookie.jpg" alt="Chocolate chip cookie on a pink plate"></div>
+  </div>
+</section>
+
+<section class="sec gal" id="moments">
+  <div class="wrap">
+    <div class="mh rv"><div><p class="lab">From the feed</p><h2 style="margin-top:12px">Seasonal <em>specials.</em></h2></div><a class="btn btn-o" href="https://www.instagram.com/teavaroindia/" target="_blank" rel="noopener">See it all on Instagram →</a></div>
+    <div class="rail rv" id="rail"></div>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="wrap og">
+    <div class="rv"><p class="lab" style="color:var(--ink)">Order</p><h2 style="margin-top:12px">Thirsty yet?<br><em>Grab a cup.</em></h2>
+      <div class="links">
+        <a class="lk" href="https://linktr.ee/teavaro" target="_blank" rel="noopener"><span>Order links<small>Teavaro's own link page</small></span><span>→</span></a>
+        <a class="lk" href="https://ig.me/m/teavaroindia" target="_blank" rel="noopener"><span>Message on Instagram<small>@teavaroindia</small></span><span>→</span></a>
+        <a class="lk" href="#build"><span>Build your cup first<small>Then send it to us</small></span><span>→</span></a>
+      </div></div>
+    <div class="rv"><div class="oimg"><img src="img/matcha-diya.jpg" alt="" style="object-position:50% 40%"></div></div>
+  </div>
+  <div class="big" aria-hidden="true">Teavaro</div>
+</section>
+<div class="foot"><div class="wrap"><span>Concept demo for Teavaro Global Brewhouse. Not the official website.</span><span>Photos from @teavaroindia on Instagram</span></div></div>
+
+<div class="mcta"><a href="#build">Build a cup</a><a class="p" href="#order">Order</a></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3200)};
+const IG='https://ig.me/m/teavaroindia';
+function dm(msg){const go=()=>setTimeout(()=>window.open(IG,'_blank','noopener'),900);
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(msg).then(()=>{toast('Copied. Paste it in the chat.');go()},()=>{toast('Opening Instagram…');go()})}else{toast('Opening Instagram…');go()}}
+
+const L=$('#loader');function hideL(){L.classList.add('off');try{sessionStorage.setItem('tv','1')}catch(e){}}
+let seen=false;try{seen=sessionStorage.getItem('tv')==='1'}catch(e){}
+if(seen)L.classList.add('off');else{setTimeout(hideL,1900);$('#skip').onclick=hideL}
+const nav=$('#nav');addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+
+/* hero pearls + slideshow */
+(function(){const p=$('#pearls');for(let i=0;i<16;i++){const e=document.createElement('i');e.style.cssText=`left:${Math.random()*100}%;--s:${10+Math.random()*16}px;--d:${9+Math.random()*9}s;--w:${-Math.random()*14}s;--x:${(Math.random()-.5)*80}px`;p.appendChild(e)}
+  const im=[...document.querySelectorAll('#hph .ph img')];let c=0;setInterval(()=>{c=(c+1)%im.length;im.forEach((m,j)=>m.classList.toggle('on',j===c))},4200)})();
+
+/* cup builder */
+const BASE=[
+ {n:'Strawberry Matcha',c:'#ef7a9a',mid:'#fff',tint:'#ffd9e3',d:'Matcha over strawberry'},
+ {n:'Matcha',c:'#9fd36a',mid:'#fff',tint:'#e3f3b8',d:'Classic green, smooth'},
+ {n:'Iced Coffee',c:'#a36a3c',mid:'#e9d3b5',tint:'#f2dcc0',d:'Cold, strong, over ice'},
+ {n:'Hot Chocolate',c:'#6b3a24',mid:'#f6e3c8',tint:'#fbd9e6',d:'Rich, with chocolate curls'},
+ {n:'Frostea',c:'#f6a43a',mid:'#fff',tint:'#ffe8b8',d:'Fruity, blended and frosty'}];
+const TOP=[{n:'Cream',c:'#ffffff'},{n:'Mango',c:'#ffd84d'},{n:'Choco curls',c:'#6b3a24'},{n:'None',c:null}];
+const EXT=['Boba pearls','Extra shot','Cookie crumb'];const SIZE=['Regular','Large'];
+const S={b:0,t:1,e:new Set(['Boba pearls']),s:0};
+function chips(id,list,get,set,multi){const el=$(id);el.innerHTML='';list.forEach((x,i)=>{const n=x.n||x;const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=n;b.setAttribute('aria-pressed',get(i,n));b.onclick=()=>{set(i,n);render()};el.appendChild(b)})}
+function render(){const b=BASE[S.b],t=TOP[S.t];
+  chips('#o-base',BASE,i=>i===S.b,i=>S.b=i);chips('#o-top',TOP,i=>i===S.t,i=>S.t=i);chips('#o-ext',EXT,(i,n)=>S.e.has(n),(i,n)=>S.e.has(n)?S.e.delete(n):S.e.add(n));chips('#o-size',SIZE,i=>i===S.s,i=>S.s=i);
+  $('#L-base').style.fill=b.c;$('#L-mid').style.fill=b.mid;
+  const top=$('#L-top');const hasT=!!t.c;top.style.fill=t.c||'transparent';
+  const bY=hasT?150:110;$('#L-base').setAttribute('y',bY);$('#L-base').setAttribute('height',400-bY);
+  $('#L-mid').setAttribute('y',hasT?122:90);$('#L-mid').setAttribute('height',hasT?34:0);
+  $('#L-top').setAttribute('y',96);$('#L-top').setAttribute('height',hasT?30:0);
+  $('#L-pearl').setAttribute('height',S.e.has('Boba pearls')?58:0);$('#L-pearl').setAttribute('y',S.e.has('Boba pearls')?342:400);
+  $('.build').style.setProperty('--tint',b.tint);
+  const ex=[...S.e];const nm=(SIZE[S.s]==='Large'?'Large ':'')+b.n;$('#cname').textContent=nm;
+  $('#sum').textContent=b.d+(t.c?', with '+t.n.toLowerCase():'')+(ex.length?', plus '+ex.join(', ').toLowerCase():'')+'.';
+  $('#send').onclick=e=>{e.preventDefault();dm(`Hi Teavaro! I'd like a ${SIZE[S.s].toLowerCase()} ${b.n}`+(t.c?` with ${t.n.toLowerCase()}`:'')+(ex.length?`, extras: ${ex.join(', ').toLowerCase()}`:'')+'. Could you share price and availability?')}}
+render();
+
+/* menu */
+const MENU={
+ 'Bubble teas':{img:0,items:[['Matcha with pearls','Layered matcha, cream and mango, with tapioca'],['Strawberry Matcha','Matcha over strawberry, with pearls'],['Fusion teas','Teas with a twist, built your way']]},
+ 'Frosteas':{img:1,items:[['Cookie ghost frosteas','Seasonal cream-topped frosteas, as on Halloween'],['Fruity frostea','Blended and iced'],['Seasonal specials','New flavours as they land']]},
+ 'Hot':{img:2,items:[['Triple hot chocolate','Dark, milk and white chocolate, with curls'],['Hot teas','For the cooler days'],['Classic coffee','Hot or iced']]},
+ 'Bites':{img:4,items:[['Burgers','Stacked and toasted'],['Grilled sandwiches','Cheesy, with a dip and chips'],['Cookies','Warm chocolate chip on a pink plate']]}
+};
+const keys=Object.keys(MENU);let cur=keys[0];const mi=[...document.querySelectorAll('#mph img')];
+keys.forEach(k=>{const b=document.createElement('button');b.type='button';b.textContent=k;b.onclick=()=>setM(k);$('#tabs').appendChild(b)});
+function setM(k){cur=k;[...$('#tabs').children].forEach(b=>b.setAttribute('aria-pressed',b.textContent===k));const m=MENU[k];mi.forEach((x,i)=>x.classList.toggle('on',i===m.img));
+  $('#mlist').innerHTML='';m.items.forEach(it=>{const li=document.createElement('li');li.innerHTML=`<div><h3>${it[0]}</h3><small>${it[1]}</small></div><span class="go">Ask</span>`;li.onclick=()=>dm(`Hi Teavaro! I'd like to know about the ${it[0]}. Could you share details and price?`);$('#mlist').appendChild(li)})}
+setM(cur);
+
+/* feed rail */
+[['halloween','Cookie ghost frosteas','Halloween special'],['cocoa','Triple hot chocolate','New on the menu'],['matcha-diya','Festive matcha','Navratri and Diwali styling'],['cookie','The cookie','Warm and chocolatey'],['iced-coffee','Iced coffee','From above'],['cafe-table','On the table','Drinks, burger and sandwich']].forEach(m=>{const a=document.createElement('article');a.className='gc';a.innerHTML=`<div class="im"><img src="img/${m[0]}.jpg" alt="${m[1]}" loading="lazy"></div><h3>${m[1]}</h3><p>${m[2]}</p>`;$('#rail').appendChild(a)});
+</script>
+</body>
+</html>
